@@ -3,7 +3,7 @@
     <head>
         <title>Flexbox</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="flex.css">
     </head>
 
     <body>
@@ -18,6 +18,8 @@
             <ul class="nav-list">
                 <li class="nav-item">Đăng ký</li>
                 <li class="nav-item">Đăng nhập</li>
+                <li class="nav-item" id="myUI" onclick="switchUI('main.css', 0)" onmouseover="changeMouse(this)">Giao diện thường</li>
+                <li class="nav-item" id="myFlexUI" onclick="switchUI('flex.css', 0)" onmouseover="changeMouse(this)">Giao diện flex</li>
                 <li class="nav-item"><input type="color" id="myColor" value="#00ff00" oninput="changeColor()" onchange="changeColor()"></li>
             </ul>
         </div>
@@ -25,12 +27,12 @@
         <!-- Form layout -->
         <div class="form-container">
             <form action="#" class="form">
-                <div class="form_row">
+                <div class="form__row">
                     <label class="form__label" for="name">Name:</label>
                     <input class="form__input" type="text" id="name">
                 </div>
 
-                <div class="form_row">
+                <div class="form__row">
                     <label class="form__label" for="password">Password:</label>
                     <input class="form__input" type="password" id="password">
                 </div>
@@ -126,6 +128,19 @@
 </html>
 
 <script>
+    function switchUI(cssFile, cssLinkIndex) {
+        var oldLink = document.getElementsByTagName("link").item(cssLinkIndex);
+
+        var newLink = document.createElement("link");
+        newLink.setAttribute("rel", "stylesheet");
+        newLink.setAttribute("type", "text/css");
+        newLink.setAttribute("href", cssFile);
+
+        document.getElementsByTagName("head").item(0).replaceChild(newLink, oldLink);
+    }
+    function changeMouse(myId) {
+        myId.style.cursor = "pointer";
+    }
     function changeColor() {
         var myColor = document.getElementById("myColor");
         var myNav = document.getElementById("myNav");
